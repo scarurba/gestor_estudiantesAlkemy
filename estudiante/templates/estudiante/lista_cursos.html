@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% block titulo %}Lista de Cursos {% endblock %}
+
+{% block contenido %}
+    <h2>Lista de Cursos</h2>
+    <div class="row mt-5">
+        {% for curso in cursos %}
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        Python
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ curso.nombre }}</h5>
+                        <p class="card-text">El curso tiene una carga horaria de: {{ curos.cantidad_horas_dictado }} horas.</p>
+                        <a href="#" class="btn btn-primary">Mas información</a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                <!-- esta expresión verifica si estamos en una iteración que es un múltiplo
+                de 3 y no es la última iteración. Si esto es cierto, significa que hemos mostrado
+                tres cards y aún no hemos alcanzado el final de la lista de cursos, por lo que
+                necesitamos cerrar el contenedor actual <div class="row"> y abrir uno nuevo para
+                comenzar una nueva fila de cards. Esto garantiza que se muestren tres cards por
+                fila en tu diseño, incluso si la cantidad de cursos no es un múltiplo exacto de tres.-->
+
+                </div> <!-- cierre del div class="row" -->
+                <div class="row mt-5"> <!-- apertura de otra fila -->
+            {% endif %}
+        {% empty %}
+            <p>No hay Cursos disponibles en este momento.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
